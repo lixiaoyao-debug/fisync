@@ -164,14 +164,14 @@ public class FileUtil {
                     //对获得的oprate内容进行规定
                     //字段operate
                     JsonElement oper = jsonObject.get("operate");
-                    //下载数据中每一行的数据可能有多个operate
-                    String[] split = oper.toString().split(",");
-                    operNum += split.length;
+                    operNum += 1;
                     //result=0直接默认更新，因为这种update的数据最多
-                    String result = "0";
-                    if ("insert".equals(oper.toString())) {
+                    String result = "666";
+                    if("UPDATE".equals(oper.getAsString())){
+                        result="0";
+                    }else if ("INSERT".equals(oper.getAsString())) {
                         result = "1";
-                    } else if ("delete".equals(oper.toString())) {
+                    } else if ("DELETE".equals(oper.getAsString())) {
                         result = "2";
                     }
                     outputLineStringBuilder.append(result).append(FIELD_REGX);
